@@ -27,7 +27,6 @@ public class ProductSearchPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String searchValue = request.getParameter("searchValue");
         request.setAttribute("products", productList);
-        ServletContext context = getServletContext();
 
         if(searchValue != null) {
             if(!searchValue.isBlank()) {

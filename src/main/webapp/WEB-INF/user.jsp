@@ -13,40 +13,52 @@
 </head>
 <body>
     <h1>사용자 등록</h1>
+    <%--
+    action: URL 데이터 전송, method: POST방식으로 서버에 데이터 전송
+    --%>
     <form action="" method="post">
-    <table>
-        <tr>
-            <td>userName</td>
-            <td><input type="text" name="userName" required></td>
-            <td>password</td>
-            <td><input type="text" name="password" required></td>
-        </tr>
-        <tr>
-            <td>name</td>
-            <td><input type="text" name="name" required></td>
-            <td>email</td>
-            <td><input type="text" name="email" required></td>
-        </tr>
-    </table>
-    <button>추가</button>
+        <table>
+            <tr>
+                <td>userName</td>
+                <td><input type="text" name="userName" required></td>
+                <td>password</td>
+                <td><input type="password" name="password" required></td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td><input type="text" name="name" required></td>
+                <td>email</td>
+                <td><input type="password" name="email" required></td>
+            </tr>
+        </table>
+        <button>추가</button>
     </form>
     <h1>사용자 조회</h1>
-    <input type="text" name="searchValue">
-    <button type="submit">조회</button>
+    <form action="" method="get">
+        <input type="text" name="searchValue">
+        <button type="submit">조회</button>
+    </form>
     <table>
+        <%--
+            사용자 정보를 표시할 테이블
+        --%>
         <tr>
             <th>username</th>
             <th>password</th>
             <th>name</th>
             <th>email</th>
         </tr>
-        <c:forEach var="user" items="${users}">
 
+        <%--
+            jstl 태그를 사용하여 사용자 목록을 반복
+            user: 속성 이름, users: 속성 값(출력할 데이터)
+        --%>
+        <c:forEach var="user" items="${users}">
             <tr>
-                <th>${username}</th>
-                <th>${password}</th>
-                <th>${name}</th>
-                <th>${email}</th>
+                <td>${user.username}</td>
+                <td>${user.password}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
             </tr>
         </c:forEach>
     </table>
