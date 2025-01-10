@@ -16,11 +16,11 @@
     <%--
     action: URL 데이터 전송, method: POST방식으로 서버에 데이터 전송
     --%>
-    <form action="" method="post">
+    <form action="http://localhost:8080/servlet_study_war/user" method="post">
         <table>
             <tr>
-                <td>userName</td>
-                <td><input type="text" name="userName" required></td>
+                <td>username</td>
+                <td><input type="text" name="username" required></td>
                 <td>password</td>
                 <td><input type="password" name="password" required></td>
             </tr>
@@ -28,7 +28,7 @@
                 <td>name</td>
                 <td><input type="text" name="name" required></td>
                 <td>email</td>
-                <td><input type="password" name="email" required></td>
+                <td><input type="text" name="email" required></td>
             </tr>
         </table>
         <button>추가</button>
