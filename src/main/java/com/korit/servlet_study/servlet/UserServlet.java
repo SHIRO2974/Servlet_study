@@ -3,12 +3,18 @@ package com.korit.servlet_study.servlet;
 import com.korit.servlet_study.entity.User;
 import com.korit.servlet_study.service.UserService;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
@@ -34,6 +40,7 @@ public class UserServlet extends HttpServlet {
                 .name(request.getParameter("name"))
                 .email(request.getParameter("email"))
                 .build();
+        System.out.println(user);
 
         userService.addUser(user);
 

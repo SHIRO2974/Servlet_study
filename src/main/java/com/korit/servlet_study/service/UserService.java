@@ -22,8 +22,7 @@ public class UserService {
     }
 
     public List<User> getAllUsers(String searchValue) {
-
-        if (searchValue == null || searchValue.isBlank()) {
+        if(searchValue == null || searchValue.isBlank()) {
             return userDao.findAll();
         }
         return userDao.findAllBySearchValue(searchValue);
@@ -33,4 +32,6 @@ public class UserService {
         Optional<User> userOptional = userDao.save(user);
         return userOptional.get();
     }
+
+
 }
