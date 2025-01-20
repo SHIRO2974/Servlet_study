@@ -25,24 +25,28 @@ public class BookRestServlet extends HttpServlet {
         BookCategory bookCategory = new BookCategory(1, "액션");
 
         Book book = Book.builder()
+                .bookId(1)
                 .bookName("아무책")
                 .isbn("123-456-789")
-                .bookImgUrl("www.weqewqr.jpg")
+                .bookImgUrl("html://test.com/1234")
+                .authorId(author.getAuthorId())
+                .publisherId(publisher.getPublisherId())
+                .categoryId(bookCategory.getCategoryId())
                 .author(author)  // Author 객체 추가
                 .publisher(publisher)  // Publisher 객체 추가
                 .bookCategory(bookCategory)  // BookCategory 객체 추가
                 .build();
 
-        String jsonBook = objectMapper.writeValueAsString(book);
+        String jsonBook = objectMapper.writeValueAsString(book);    // json 문자열로 변환해주는 jackson API
         System.out.println(jsonBook);
 
-        resp.setHeader("Access-Control-Allow-Origin", "*"); // 모든 서버에서 호출을 허용
-        resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");   // 메서드의 POST, GET, OPTIONS 요청만 허용
-        resp.setHeader("Access-Control-Allow-Headers", "Content-type"); //
-        resp.setHeader("Access-Control-Allow-Credentials", "true"); // 브라우저에서 저장되어지는 쿠키를 허용
+//        resp.setHeader("Access-Control-Allow-Origin", "*"); // 모든 서버에서 호출을 허용
+//        resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");   // 메서드의 POST, GET, OPTIONS 요청만 허용
+//        resp.setHeader("Access-Control-Allow-Headers", "Content-type"); //
+//        resp.setHeader("Access-Control-Allow-Credentials", "true"); // 브라우저에서 저장되어지는 쿠키를 허용
 
-        resp.setContentType("application/json");
-        resp.getWriter().println(jsonBook);
+        resp.setContentType("application/json");    // 타입을 Json 으로 변경
+        resp.getWriter().println(jsonBook); // Json 문자열로 응답
     }
 
     @Override

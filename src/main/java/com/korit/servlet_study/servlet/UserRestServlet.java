@@ -26,15 +26,15 @@ public class UserRestServlet extends HttpServlet {
         String jsonUser = objectMapper.writeValueAsString(user);
         System.out.println(jsonUser);
 
-        resp.setHeader("Access-Control-Allow-Origin", "*"); // 모든 서버에서 호출을 허용
-        resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");   // 메서드의 POST, GET, OPTIONS 요청만 허용
-        resp.setHeader("Access-Control-Allow-Headers", "Content-type"); //
-        resp.setHeader("Access-Control-Allow-Credentials", "true"); // 브라우저에서 저장되어지는 쿠키를 허용
+//        resp.setHeader("Access-Control-Allow-Origin", "*"); // 모든 서버에서 호출을 허용
+//        resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");   // 메서드의 POST, GET, OPTIONS 요청만 허용
+//        resp.setHeader("Access-Control-Allow-Headers", "Content-type"); //
+//        resp.setHeader("Access-Control-Allow-Credentials", "true"); // 브라우저에서 저장되어지는 쿠키를 허용
 
         resp.setContentType("application/json");
         resp.getWriter().println(jsonUser);
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
