@@ -28,6 +28,7 @@ public class BoardRestServlet extends HttpServlet {
         StringBuilder stringBuilder = new StringBuilder();
 
         // BufferedReader 를 사용한 후 반드시 해당 리소스를 정리하기 위해 try 사용
+        // 버퍼에 Json 문자열을 넣어 라인 단위로 끊어서 가지고 온다
         try (BufferedReader bufferedReader = req.getReader()) {
 
             String line;
@@ -43,12 +44,9 @@ public class BoardRestServlet extends HttpServlet {
         InsertBoardDto insertBoardDto = objectMapper.readValue(stringBuilder.toString(), InsertBoardDto.class);
         System.out.println(insertBoardDto); // InsertBoardDto(title=qweqwe, content=<p>qwewqe</p>) Json 을 java 객체로 반환
 
-        Board board = Board.builder()
-                .boardId(1)
-                .title()
-                .build();
 
-        boardService.addBoard(board)
+
+
     }
 
 }
