@@ -25,7 +25,7 @@ public class AuthDao {
     }
 
 
-    public User findUserByUsername(String username) {
+    public User findUserByUsername(String username) {   // username 으로 사용자를 찾는다
         User foundUser = null;
         Connection con = null;
         PreparedStatement ps = null;
@@ -33,6 +33,7 @@ public class AuthDao {
 
         try {
             con = dbConnectionMgr.getConnection();
+            // SQL 쿼리 작성: username 으로 사용자 정보 조회
             String sql = """
                     select
                         user_id,
@@ -46,8 +47,9 @@ public class AuthDao {
                         username = ?
                     """;
             ps = con.prepareStatement(sql);
-            ps.setString(1, username); // username 을 찾는다
+            ps.setString(1, username); // SQL 의 첫 번째 파라미터에 username 값을 설정
             rs = ps.executeQuery();
+
             if (rs.next()) {
                 foundUser = User.builder()
                         .userId(rs.getInt("user_id"))
@@ -75,6 +77,7 @@ public class AuthDao {
 
         try {
             con = dbConnectionMgr.getConnection();
+            // SQL 쿼리 작성: 사용자 정보를 user_tb 테이블에 삽입
             String sql = "insert into user_tb values(default, ?, ?, ?, ?)";
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getUsername());
@@ -101,6 +104,6 @@ public class AuthDao {
         }
 
 
-        return insertedUser;
+        return insertedUser;    // 데이터베이스에 삽입된 사용자 정보를 반환
     }
 }

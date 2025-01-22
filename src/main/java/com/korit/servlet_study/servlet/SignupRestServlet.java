@@ -16,9 +16,11 @@ import java.io.IOException;
 
 @WebServlet("/api/signup")
 public class SignupRestServlet extends HttpServlet {
+
     private AuthService authService;
 
     public SignupRestServlet() {
+
         authService = AuthService.getInstance();
     }
 
