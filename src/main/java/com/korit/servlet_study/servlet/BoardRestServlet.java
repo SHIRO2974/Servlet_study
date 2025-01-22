@@ -2,7 +2,9 @@ package com.korit.servlet_study.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.korit.servlet_study.dto.InsertBoardDto;
+import com.korit.servlet_study.dto.ResponseDto;
 import com.korit.servlet_study.entity.Board;
+import com.korit.servlet_study.server_flow.Response;
 import com.korit.servlet_study.service.BoardService;
 
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ public class BoardRestServlet extends HttpServlet {
         boardService = BoardService.getInstance();
     }
 
+    // 클라이언트에서 전달받은 Json 을 받아오기위한 doPost
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -42,11 +45,14 @@ public class BoardRestServlet extends HttpServlet {
 
         // key, value 들을 매칭해서 class 객체로 생성
         InsertBoardDto insertBoardDto = objectMapper.readValue(stringBuilder.toString(), InsertBoardDto.class);
-        System.out.println(insertBoardDto); // InsertBoardDto(title=qweqwe, content=<p>qwewqe</p>) Json 을 java 객체로 반환
 
+         //  Json 을 java 객체로 변환
+        ResponseDto<?> responseDto = boardService.insertBoard(insertBoardDto);
+        String responseJson = objectMapper.writeValueAsString(responseDto);
 
-
-
+        // 클라이언트에 Json 데이터로 반환하여 응답을 보냄
+        resp.setStatus(responseDto.getStatus());
+        resp.setContentType("application/json");
+        resp.getWriter().println(responseJson);
     }
-
 }
