@@ -1,6 +1,7 @@
 package com.korit.servlet_study.security.jwt;
 
 import com.korit.servlet_study.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -41,6 +42,38 @@ public class JwtProvider {
                 .setExpiration(getExpireDate()) // 토큰 만료시간
                 .signWith(key, SignatureAlgorithm.HS256)    // 암호화 진행
                 .compact();
+    }
 
+    // 토큰 인증 함수
+    public Claims parseToken(String token) {
+
+        Claims claims = null;
+        try {
+
+            claims = Jwts.parserBuilder()   // Jwts 로 만들어주는 빌더
+                    .setSigningKey(key)     // 클라이언트에서 받은 키 값을 확인한다
+                    .build()
+                    .parseClaimsJws(removeBearer(token))  // remove 를 한 token 에 들어있는 Claims 을 가지고 온다
+                    .getBody(); // 리턴값이 Claims 로 반환
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        return claims;
+    }
+
+    private String removeBearer(String bearerToken) {
+
+        String accessToken = null;
+        final String BEARER_KEYWORD = "Bearer ";
+
+        // BEARER_KEYWORD 으로 문자열로 시작했는지 확인
+        if (bearerToken.startsWith(BEARER_KEYWORD)) {
+
+            accessToken = bearerToken.substring(BEARER_KEYWORD.length());
+        }
+        //  토큰 인덱스부터 인덱스를 잘라서 accessToken 으로 대입
+        return accessToken;
     }
 }
