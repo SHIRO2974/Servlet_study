@@ -32,7 +32,7 @@ public class JwtProvider {
 
     private Date getExpireDate() {
 
-        return new Date(new Date().getTime() + (1000l * 60 * 60 * 24 * 365));
+        return new Date(new Date().getTime() + (1000l * 60 * 60 * 24 * 365));   // 1년 뒤 만료
     }
 
     public String generateToken(User user) {    // 로그인이 되어진 User 를 전달

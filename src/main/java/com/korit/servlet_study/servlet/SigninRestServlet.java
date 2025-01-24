@@ -24,8 +24,10 @@ public class SigninRestServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StringBuilder requestJsonData = new StringBuilder();
+
         try(BufferedReader reader = request.getReader()) {
             String line;
+
             while ((line = reader.readLine()) != null) {
                 requestJsonData.append(line);
             }
@@ -35,6 +37,7 @@ public class SigninRestServlet extends HttpServlet {
 
         ResponseDto<?> responseDto = authService.signin(signinDto);
 
+        // json 으로 변환
         response.setContentType("application/json");
         response.setStatus(responseDto.getStatus());
         response.getWriter().println(mapper.writeValueAsString(responseDto));
