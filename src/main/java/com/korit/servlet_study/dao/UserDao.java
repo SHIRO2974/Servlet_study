@@ -41,11 +41,11 @@ public class UserDao {
                         username,
                         password,
                         name,
-                        email,
+                        email
                     from
                         user_tb
                     where
-                        user_id=?
+                        user_id = ?
                     """;
             ps = con.prepareStatement(sql);
             ps.setInt(1, userId);

@@ -99,6 +99,7 @@ public class AuthDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
+
         } finally {
             dbConnectionMgr.freeConnection(con, ps);
         }
